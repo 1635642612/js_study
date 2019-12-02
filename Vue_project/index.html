@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据绑定和事件触发</title>
+	</head>
+	<body>
+		<div id="div1">
+		{{message.name}}
+		<div>一共点击了  {{clickNumber}}次</div>
+		<!-- <button v-on:click="count">点击</button> -->
+		<button @click="count">点击</button>
+		
+		</div>
+		
+	</body>
+	
+	<script src="js/vue.min.js"></script>
+	<script>
+		//准备数据
+		var gareen = {"name":"盖伦","hp":616};
+		
+		new Vue({
+			  el: '#div1',
+			  data: {
+			    message: gareen,
+				clickNumber:0
+			  },
+			  methods:{
+			      count: function(){
+			           this.clickNumber++;
+			      }
+			  }
+			})
+	</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-bind属性绑定</title>
+	</head>
+	<body>
+		<script src="js/vue.min.js"></script>
+		   
+		<div id="div1">
+			简写：  v-bind:href  -- :href   替href属性赋值<br/>
+		    <a v-bind:href="page">http://12306.com</a>
+		</div>
+		    
+		<script>
+		  
+		new Vue({
+		      el: '#div1',
+		      data:{
+		          page:'http://12306.com'
+		      }
+		    })
+		    
+		</script>
+	</body>
+</html>

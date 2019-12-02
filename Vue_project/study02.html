@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>（冒泡）事件修饰符</title>
+	</head>
+	<body>
+		<script src="js/vue.min.js"></script>
+		  
+		<style type="text/css">
+		   * {
+		       margin: 0 auto;
+		       text-align:center;
+		       line-height: 40px;
+		   }
+		   div {
+		       width: 100px;
+		       cursor:pointer;
+		   }
+		   #grandFather {
+		       background: green;
+		   }
+		   #father {
+		       background: blue;
+		   }
+		   #me {
+		       background: red;
+		   }#son {
+		        background: gray;
+		    }
+		</style>
+		<p>事件修饰符 里面有几个都是关于冒泡的，那么什么是冒泡呢? 简单的说就是 父元素里有 子元素， 如果点击了 子元素, 那么click 事件不仅会发生在子元素上，也会发生在其父元素上，依次不停地向父元素冒泡，直到document元素。</p>
+		<p>vue.js 还提供了各种事件修饰符来方便开发者使用 :
+			.stop : 在me上的click后面加一个 .stop， 那么冒泡到了这里就结束了，就不会冒到father上面去了。<br/>
+			.prevent   通过在 click 后面添加 .prevent 可以阻止页面刷新。<br/>
+			.capture :那么当冒泡发生的时候，就会优先让father捕捉事件。点击son或者me的时候，都会优先触发它<br/>
+			.self : 修改father,增加 .self 这样点击son 和 me都不会导致其触发click事件，只有点击father自己，才会导致事件发生。 <br/>
+			.once : 这样father点击一次之后，就不会再监听到click了，但是有意思的是，grandFather还能监听到~<br/>
+		</p>
+		     
+		<div id="content">
+		    <div id="grandFather"  v-on:click="doc" name="dhp1">
+		        grandFather
+		        <div id="father" v-on:click.self="doc" name="dhp2">
+		            father
+		            <div id="me" @click.stop="doc" name="dhp3">
+		                me
+		                <div id="son" v-on:click.once="doc" name="dhp4">
+		                son
+		            </div>
+		            </div>
+		        </div>
+		    </div>
+		 
+		</div>
+		   
+		<script>
+		    var content = new Vue({
+		        el: "#content",
+		        data: {
+		            id: '',
+					name:''
+		        },
+		        methods: {
+		            doc: function () {
+		                this.id= event.currentTarget.id;
+		                alert(this.id)
+						
+		            }
+		        }
+		    })
+		</script>
+	</body>
+</html>
